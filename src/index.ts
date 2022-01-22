@@ -14,22 +14,22 @@ app.use(cors())
 const array: props[] = [{name:'david',id:'1'},{name:'david',id:'2'}, {name:'isabel',id:'3'}];
 
 
-app.get('/',(req: Request, res: Response) =>      
+app.get('/',(req: Request, res: Response): express.Response<any, Record<string, any>>=>      
     res.status(200).json(array)
 )
 
-app.post('/add',(req: Request, res: Response) =>{
+app.post('/add',(req: Request, res: Response):void =>{
  const {name, id } = req.body;
  array.push({name,id})
  res.status(200).json({message:'success'})   
 })
 
-app.delete('/del/:id',(req: Request,res: Response)=>{
+app.delete('/del/:id',(req: Request,res: Response):void=>{
     const {id} = req.params;
     array.splice(array.findIndex(item=> item.id===id),1)
     res.status(200).json(array)
 })
-app.get('/jaja/:id',(req: Request, res: Response) =>{
+app.get('/jaja/:id',(req: Request, res: Response):void=>{
     const {id} = req.params;
     res.status(200).json(array.find(item => item.id===id))
 })
